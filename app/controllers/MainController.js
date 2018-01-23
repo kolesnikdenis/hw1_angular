@@ -6,5 +6,6 @@ app.controller('MainController', ['$scope',function ($scope) {
     $scope.summ=0;
     $scope.calc= function () {
         $scope.summ = +$scope.x + +$scope.y
+        console.log($scope.summ)
     }
 }]);
