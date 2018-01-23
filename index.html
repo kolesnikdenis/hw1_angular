@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="advanced2" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Title</title>
+</head>
+<body ng-controller="MainController">
+
+<div class="container">
+    <div class="page-header">
+        <h1>AngularJs</h1>
+    </div>
+    <input type="text" ng-model="x">
+    +
+    <input type="text" ng-model="y">
+    <button class="btn btn-primary" ng-click="calc()">Calc</button>
+    <span ng-show="sum !== 0">
+        = {{sum}}
+    </span>
+    <p>hello</p>
+</div>
+
+<script src="./node_modules/angular/angular.js"></script>
+<script src="./app/app.js"></script>
+<script src="./app/controllers/MainController.js"></script>
+</body>
+</html>
