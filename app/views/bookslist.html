@@ -1,0 +1,58 @@
+<div ng-controller="BooksListController" >
+<form ng-submit="formAdd.$valid &&  addBook()" novalidate name="formAdd">
+    <div class="form-group">
+        <input type="text" placeholder="Title" required ng-model="newBook.title" class="form form-control">
+    </div>
+    <div class="form-group">
+        <input type="text" placeholder="Author" required ng-model="newBook.author" class="form form-control">
+    </div>
+    <div class="form-group">
+        <input type="text" placeholder="Rate" required ng-model="newBook.rate" class="form form-control">
+    </div>
+    <div class="form-group">
+        <input type="text" placeholder="Cost" required ng-model="newBook.cost" class="form form-control">
+    </div>
+    <div class="form-group date" data-provide="datepicker">
+        <input type="text" placeholder="Date" ng-model="newBook.date" class="form form-control">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary"  >save</button>
+    </div>
+</form>
+<input type="text"  placeholder="Filter" ng-model="filterField">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th ng-click="orderBy('title')"><i class="fa" ng-class="{'fa-chevron-up': orderField === 'title', 'fa-chevron-down': orderField === '-title'}"></i>Title</th>
+            <th ng-click="orderBy('author')"><i class="fa" ng-class="{'fa-chevron-up': orderField === 'author', 'fa-chevron-down': orderField === '-author'}"></i>Author</th>
+            <th ng-click="orderBy('rate')"><i class="fa" ng-class="{'fa-chevron-up': orderField === 'rate', 'fa-chevron-down': orderField === '-rate'}"></i>Rate</th>
+            <th ng-click="orderBy('cost')"><i class="fa" ng-class="{'fa-chevron-up': orderField === 'cost', 'fa-chevron-down': orderField === '-cost'}"></i>Cost</th>
+            <th ng-click="orderBy('date')"><i class="fa" ng-class="{'fa-chevron-up': orderField === 'date', 'fa-chevron-down': orderField === '-date'}"></i>Date</th>
+            <th >Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="book in books  | limitTo:3 | orderBy : orderField | filter: filterField track by $index">
+                <td>{{book.title | uppercase}}</td>
+                <td>{{book.author | lowercase }}</td>
+                <td>{{book.rate | number : 2}}</td>
+                <td>{{book.cost | currency}}</td>
+                <td>{{book.date | date : 'dd-MM-yyyy HH:mm'}}</td>
+                <td><button class="btn btn-danger btn-xs" ng-click="deleteBook($index)"><i class="fa fa-window-close">X</i></button> </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    {{value}}
+    <input type="text" ng-model="value">
+    <hr>
+
+    <ng-include src="'test.html'"></ng-include>
+    <script type="text/ng-template" id="test.html">
+        {{value}}
+        <input type="text" ng-model="value">
+    </script>
+
+</div>
