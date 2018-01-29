@@ -1,6 +1,5 @@
-console.log("load api controller");
-
 app.controller('api_controller', ['$scope', '$http', function($scope, $http) {
+    console.log("load api controller");
     $scope.items = [];
     $scope.out_text = "text";
     $scope.show = function(text){
@@ -10,7 +9,6 @@ app.controller('api_controller', ['$scope', '$http', function($scope, $http) {
         var dataObj = {
             task : 'get_categories'
         };
-
         var config = {headers : {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}}
         function restruct(in_data,def,add_data) {
             var out=[];
@@ -50,13 +48,9 @@ app.controller('api_controller', ['$scope', '$http', function($scope, $http) {
         };
         get_last_workk().then((res_sel_rig_last) => {
             $scope.items  = res_sel_rig_last;
-
-            //show_menu($scope.items);
-
-            $scope.items=restruct($scope.items);
+            $scope.items = restruct($scope.items);
             console.log($scope.items);
-            //$scope.out_text = JSON.stringify($scope.items);
+
         });
-        //$scope.out_text="sss";
     };
 }])

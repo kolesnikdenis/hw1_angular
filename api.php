@@ -1,18 +1,17 @@
 <?php
-header('Content-Type: application/json');
-
 session_start();
 $session_id = session_id();
+header('Content-Type: application/json');
 
 require_once './mail/lib/swift_required.php';
 $t=json_encode($_POST);
 $tt=json_decode($t);
 $tt = $tt->{'data'};
-$tt=json_decode($tt);<?php
+$tt=json_decode($tt);
 session_start();
 $session_id = session_id();
 
-require_once './lib/swift_required.php';
+
 
 $out = array(
     'html' => $_SERVER['REQUEST_METHOD'],
@@ -93,7 +92,8 @@ if ($tt->{'task'}) {
             while ($row = $result->fetch_assoc()) {
                 $myArray[] = $row;
             }
-            $tt->{'sql'} = json_encode($myArray);
+            $out['status']='true';
+            //$tt->{'sql'} = json_encode($myArray);
             $out['sql'] =  json_encode($myArray);
         }
     }

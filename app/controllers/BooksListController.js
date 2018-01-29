@@ -1,6 +1,4 @@
-//    app.controller('BooksListController', ['$scope', function ($scope) { } ] )
-
-    app.controller('BooksListController', ['$scope',function ($scope) {
+app.controller('BooksListController', ['$scope','$uibModal',function ($scope, $uibModal) {
         $scope.orderField='date';
 
         var bookModel = {
