@@ -1,29 +1,125 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="advanced2">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <title>The first class work.</title>
-</head>
+<style >
+    ul.list_1 li .thumbnail ff:hover .zoom-icon {
+        background: rgba(141,191,65,0.5);
+        -webkit-transition: 0.4s;
+        -moz-transition: 0.4s;
+        -o-transition: 0.4s;
+        transition: 0.4s;
+        top: 0;
 
-<body ng-controller="MainController">
-<div class="container">
-    <div class="page-header">
-        <h1>from ubuntu Angular Js</h1>
-    </div>
-    <input type="text" ng-model="x">
-    +
-    <input type="text" ng-model="y">
-    <button class="btn btn-primary" ng-click="calc()">Calc</button>
-    <span ng-if="summ !== 0">
-        = {{summ}}
-    </span>
-    <ng-include src="'./app/views/bookslist.html'"></ng-include>
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+    ff:hover p.center_icon{
+        display: block;
+        text-align: center;
+        color: white;
+        -webkit-text-stroke: 1px #b1bdb73d;
+    }
+    ff:hover p.center_icon a{
+        color: #b3ff07eb;
+        text-shadow: 1px 1px 2px black, 0 0 1em #dae0e5;
+    }
+    ff:hover span.zoom-icon:before {
+        content: '';
+    }
+    ul.list_1 li .thumbnail ff .zoom-icon {
+        background: #8dbf41;
+        opacity: 1;
+        filter: alpha(opacity=100);
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        position: absolute;
+        top: 70%;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .zoom-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        background: rgba(0,0,0,0.4);
+        opacity: 0;
+        cursor: pointer;
+        -webkit-transition: 0.2s;
+        -moz-transition: 0.2s;
+        -o-transition: 0.2s;
+        transition: 0.2s;
+    }
+    article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+        display: block;
+    }
+    .posts-grid {
+        margin: 0;
+    }
 
-    <ng-include src="'./app/views/category.html'"></ng-include>
+    .posts-grid li .featured-thumbnail img {
+        width: 100%;
+    }
 
-<style>
+    .posts-grid li .featured-thumbnail img {
+        width: 100%;
+    }
+    img {
+        max-width: 100%;
+        width: auto \9;
+        height: auto;
+        vertical-align: middle;
+        border: 0;
+        -ms-interpolation-mode: bicubic;
+    }
+    .thumbnail {
+        display: block;
+        padding: 4px;
+        line-height: 23px;
+        max-width: 180px;
+        border: 1px solid #ddd;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        /* border-radius: 4px; */
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+    figure {
+        display: block;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 40px;
+        -webkit-margin-end: 40px;
+    }
+    li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+    }
+    ul, menu, dir {
+        display: block;
+        list-style-type: disc;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 40px;
+    }
+    ul.list_1 li .thumbnail {
+        position: relative;
+        -webkit-border-radius: 268px;
+        -moz-border-radius: 268px;
+        /* border-radius: 268px; */
+        max-width: 192px;
+    }
+
     ul.list_1 li .thumbnail ff {
         display: inline-block;
         overflow: hidden;
@@ -118,13 +214,9 @@
         display: inline-block !important;
         margin: 0 0 0 0% !important;
     }
-    .foto{
-        width: 300px;
-        height: 350px;
-        margin: 0 auto;
-    }
 
 </style>
+
 <div class="span12 "><section class="lazy-load-box effect-fade" data-delay="200" data-speed="800" style="transition: all 800ms ease; opacity: 1;">
     <ul class="posts-grid row-fluid unstyled list_1 ul-item-0">
         <li class="span3 list-item-1">
@@ -210,38 +302,3 @@
     </ul>
 </section>
 </div>
-<div class="foto">
-    <img src="https://images.unsplash.com/reserve/oIpwxeeSPy1cnwYpqJ1w_Dufer%20Collateral%20test.jpg?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4e6cb38a2b7ce702bc48afa2badadef6&auto=format&fit=crop&w=616&q=80">
-</div>
-    <!-- <ng-include src="'./app/views/panel.html'"></ng-include> -->
-</div>
-
-<script src="/node_modules/angular/angular.js"></script>
-<script src="./app/app.js"></script>
-<script src="./app/controllers/MainController.js"></script>
-<script src="./app/controllers/BooksListController.js"></script>
-<script src="./app/controllers/category.js"></script>
-<script data-require="lodash.js@4.11.1" data-semver="4.11.1" src="https://cdn.jsdelivr.net/lodash/4.11.1/lodash.js"></script>
-<script>
-    function show_menu(items) {
-        _.forEach(items, function(item, key1) {
-            var ul = document.createElement('ul');
-            li = document.createElement('li');
-            li.setAttribute("id", "menu_ul_" + item.id);
-            var menu_link = document.createElement('a');
-            menu_link.href = 'javascript:alert("' + item.id + '");';
-            var textNode = document.createTextNode(item.name);
-            menu_link.appendChild(textNode);
-            li.appendChild(menu_link);
-            ul.appendChild(li);
-            if (item.subsections == 0) {
-                document.body.appendChild(ul); /* вывод корневых .. */
-            } else {
-                //$$('li#menu_ul_' + item.subsections).append(ul); /* добавляем пункты */
-            }
-        });
-    }
-
-</script>
-</body>
-</html>
