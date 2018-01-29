@@ -1,6 +1,5 @@
 //    app.controller('BooksListController', ['$scope', function ($scope) { } ] )
 
-console.log("a");
     app.controller('BooksListController', ['$scope',function ($scope) {
         $scope.orderField='date';
 

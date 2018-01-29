@@ -23,7 +23,6 @@
 
     <ng-include src="'./app/views/category.html'"></ng-include>
 
-
     <!-- <ng-include src="'./app/views/panel.html'"></ng-include> -->
 </div>
 
@@ -33,26 +32,5 @@
 <script src="./app/controllers/BooksListController.js"></script>
 <script src="./app/controllers/category.js"></script>
 <script data-require="lodash.js@4.11.1" data-semver="4.11.1" src="https://cdn.jsdelivr.net/lodash/4.11.1/lodash.js"></script>
-<script>
-    function show_menu(items) {
-        _.forEach(items, function(item, key1) {
-            var ul = document.createElement('ul');
-            li = document.createElement('li');
-            li.setAttribute("id", "menu_ul_" + item.id);
-            var menu_link = document.createElement('a');
-            menu_link.href = 'javascript:alert("' + item.id + '");';
-            var textNode = document.createTextNode(item.name);
-            menu_link.appendChild(textNode);
-            li.appendChild(menu_link);
-            ul.appendChild(li);
-            if (item.subsections == 0) {
-                document.body.appendChild(ul); /* вывод корневых .. */
-            } else {
-                //$$('li#menu_ul_' + item.subsections).append(ul); /* добавляем пункты */
-            }
-        });
-    }
-
-</script>
 </body>
 </html>
