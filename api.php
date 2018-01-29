@@ -71,12 +71,10 @@ if ($tt->{'task'}) {
             $out['msg']='уже существует';
         }
     }
+    //валидация mail
     if ($tt->{'task'} == 'email_verification') {
         $tomail = $tt->{'login'};
         $session= $tt->{'session_id'};
-
-
-
         $sql="UPDATE `web_freelancer`.`user` SET `validation` = '1' WHERE `user`.`mail` = ".$tomail ." and validation = '".$session."'";
         $result = mysqli_query($con,$sql);
         $index = $con->insert_id;
@@ -86,6 +84,7 @@ if ($tt->{'task'}) {
             $out['status']="true";
         }
     }
+    //получение категорий
     if ($tt->{'task'} == 'get_categories') {
         $sql = "SELECT * FROM  `categories`";
         $result = mysqli_query($con, $sql);
