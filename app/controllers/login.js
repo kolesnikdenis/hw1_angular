@@ -9,7 +9,6 @@ app.controller('LoginController', ['$scope', '$http','$uibModal', function($scop
         $uibModal.open({
             //templateUrl: 'app/modals/login/login-form.html',
             template: '<div>hello</div>'
-            //controller: 'LoginController'
         }).result.catch(function (resp) {
             if (['cancel', 'backdrop click', 'escape key press'].indexOf(resp) === -1) throw resp;
         });

@@ -33,24 +33,30 @@ app.controller('api_controller', ['$scope', '$http', function($scope, $http) {
             return (out);
         }
         function get_last_workk() {
-            return new Promise((resolve) => {
+        //    return new Promise((resolve) => {
                 $http.post('https://kolesnikdenis.com/a-level/test/api.php', "data=" + JSON.stringify(dataObj), config).then(
                 function (response) {
                     var sql = JSON.parse(response.data.sql);
-                    var out=[];
-                    sql.map(function (item) {
+                    console.log(sql);
+                    $scope.items = $scope.items = restruct(sql);
+                    //retrun sql;
+                    //var out=[];
+                    //sql.map(function (item) {
                         //console.log(item);
-                        out.push(item);
-                    })
-                    resolve(out)
-                });
-            });
-        };
-        get_last_workk().then((res_sel_rig_last) => {
-            $scope.items  = res_sel_rig_last;
-            $scope.items = restruct($scope.items);
-            console.log($scope.items);
+                        //out.push(item);
+                        //retrun item;
+                    //})
 
-        });
+                    //resolve(out)
+                });
+            }//);
+        //};
+        get_last_workk();
+        /*get_last_workk().then((res_sel_rig_last) => {
+            //$scope.items  = res_sel_rig_last;
+            $scope.items = restruct($scope.items);
+            //console.log($scope.items);
+
+        });*/
     };
 }])
