@@ -32,11 +32,11 @@ if ($tt->{'task'}) {
     }
     //регистрация
     if ($tt->{'task'} == 'registration') {
-        $sql = "SELECT * FROM `user` where mail=='.$tt->{'login'}.'";
+        $sql = "SELECT * FROM `user` where mail='".$tt->{'login'}."'";
         $result = mysqli_query($con, $sql);
-        $tt->sql= $result->num_rows;
-        if ($result->num_rows = 0) {
-            $sql = "INSERT INTO `web_freelancer`.`user`  ( `mail`, `datatime`, `password`, `validation`, `validation`  )VALUES ( '" . $tt->{'login'} . "', NOW(),  PASSWORD('" . $tt->{'password'} . "'), '0', '".$session_id."' );";
+        $tt->sql = $result->num_rows;
+        if (!$result->num_rows) {
+            $sql = "INSERT INTO `web_freelancer`.`user`  ( `mail`, `datatime`, `password`, `validation`, `session_id`  )VALUES ( '" . $tt->{'login'} . "', NOW(),  PASSWORD('" . $tt->{'password'} . "'), '0', '".$session_id."' );";
             $result = mysqli_query($con,$sql);
             $index = $con->insert_id;
             if (!$index) {
@@ -67,7 +67,7 @@ if ($tt->{'task'}) {
             }
         }else {
             $out['status']="false";
-            $out['msg']='уже существует';
+            $out['msg']='пользователь с таким логином уже существует';
         }
     }
     //валидация mail
