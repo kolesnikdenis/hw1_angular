@@ -8,11 +8,13 @@
 </head>
 
 <body ng-controller="MainController">
-<ng-include src="'./app/views/login.html'"></ng-include>
+
 <div class="container">
-    <div class="page-header">
-        <h1>from ubuntu Angular Js</h1>
-    </div>
+    <ng-include src="'./app/views/partials/header.html'"></div>
+    <ng-include src="'./app/views/login.html'"></ng-include>
+    <div ng-view></div>
+
+
 
     <input type="text" ng-model="x">
     +
@@ -21,7 +23,6 @@
     <span ng-if="summ !== 0">
         = {{summ}}
     </span>
-    <ng-include src="'./app/views/bookslist.html'"></ng-include>
 
     <ng-include src="'./app/views/category.html'"></ng-include>
 
@@ -49,6 +50,7 @@
         .modal .modal-body {
             overflow-y: auto;
         }
+
     </style>
 
     <div class="foto">
@@ -56,15 +58,18 @@
     </div>
     <!-- <ng-include src="'./app/views/panel.html'"></ng-include> -->
 </div>
-
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDAeSl4DaDVBBV8KrSc0Qz05kRk_rBf0gQ&sensor=false&extension=.js"></script>
 <script src="/node_modules/angular/angular.js"></script>
 <script src="./app/app.js"></script>
 <script src="./app/controllers/MainController.js"></script>
+<script src="./app/controllers/map.js"></script>
 <script src="./app/controllers/BooksListController.js"></script>
 <script src="./app/controllers/category.js"></script>
 <script src="./app/controllers/loginController.js"></script>
 <script src="./app/controllers/login.js"></script>
+<script src="./app/app.config.js"></script>
 <script src="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+<script src="/node_modules/angular-route/angular-route.js"></script>
 <script data-require="lodash.js@4.11.1" data-semver="4.11.1" src="https://cdn.jsdelivr.net/lodash/4.11.1/lodash.js"></script>
 </body>
 </html>

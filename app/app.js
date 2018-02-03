@@ -1,1 +1,1 @@
-var app = angular.module('advanced2',  ['ui.bootstrap']);
+var app = angular.module('advanced2',  ['ui.bootstrap','ngRoute']);

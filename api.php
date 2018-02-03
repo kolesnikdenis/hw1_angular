@@ -52,7 +52,7 @@ if ($tt->{'task'}) {
                 $message = Swift_Message::newInstance('hello from geo freelance')
                     ->setFrom(array('freelance@kolesnikdenis.com' => 'geo freelance')) // can be $_POST['email'] etc...
                     ->setTo(array($tomail => 'Hellow new user')) // your email / multiple supported.
-                    ->setBody('Here is the <strong>message</strong> <br> tyt budet ssilka validacii i t.d. :D <br> <h1> session id:'.$session_id.'</h1>', 'text/html');
+                    ->setBody('Here is the <strong>message</strong> <br> tyt budet ssilka validacii i t.d. :D <br> <a href="http://kolesnikdenis.com/a-level/test/index.html#/valid/'.$session_id.'/'.$tomail.'">this is link :D</a> <h1> session id:'.$session_id.'</h1>', 'text/html');
 
                 if ($mailer->send($message)) {
                     $out['msg']='Вам отправлено письмо с верификацией email';
@@ -74,13 +74,23 @@ if ($tt->{'task'}) {
     if ($tt->{'task'} == 'email_verification') {
         $tomail = $tt->{'login'};
         $session= $tt->{'session_id'};
-        $sql="UPDATE `web_freelancer`.`user` SET `validation` = '1' WHERE `user`.`mail` = ".$tomail ." and validation = '".$session."'";
-        $result = mysqli_query($con,$sql);
-        $index = $con->insert_id;
-        if ($index <=0 ) {
+        $sql = "SELECT * FROM `user` where  `user`.`mail` = '" . $tomail . "' and session_id = '" . $session . "' and validation = '0' ";
+        $result = mysqli_query($con, $sql);
+        $tt->sql = $result->num_rows;
+        if ($result->num_rows) {
+            $sql = "UPDATE `web_freelancer`.`user` SET `validation` = '1' WHERE `user`.`mail` = '" . $tomail . "' and session_id = '" . $session . "'";
+            //$result = mysqli_query($con,$sql);\
+            if ($con->query($sql) === TRUE) {
+                ///$index =  $result->num_rows;
+                //if ($index <=0 ) {
+                $out['status'] = "true";
+            } else {
+                $out['status'] = "false" . $sql . $index;
+            }
+        }else {
             $out['status']="false";
-        } else {
-            $out['status']="true";
+            $out['sql']=$sql;
+            $out['msg']='пользователь с таким логином или сессии не существует или уже валидирован';
         }
     }
     //получение категорий
