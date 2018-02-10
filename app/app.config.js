@@ -10,7 +10,6 @@ app.config(function($routeProvider, $locationProvider) {
         })
         .when("/map", {
             templateUrl : "app/views/GoogleMap.html",
-            controller: 'MapController'
         })
         .when("/valid/:session_id/:mail", {
             templateUrl : "app/views/validation.html",

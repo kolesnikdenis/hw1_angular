@@ -32,18 +32,18 @@ if ($tt->{'task'}) {
     }
     //регистрация
     if ($tt->{'task'} == 'registration') {
-        $sql = "SELECT * FROM `user` where mail='".$tt->{'login'}."'";
+        $sql = "SELECT * FROM `user` where mail='".$tt->{'username'}."'";
         $result = mysqli_query($con, $sql);
         $tt->sql = $result->num_rows;
         if (!$result->num_rows) {
-            $sql = "INSERT INTO `web_freelancer`.`user`  ( `mail`, `datatime`, `password`, `validation`, `session_id`  )VALUES ( '" . $tt->{'login'} . "', NOW(),  PASSWORD('" . $tt->{'password'} . "'), '0', '".$session_id."' );";
+            $sql = "INSERT INTO `web_freelancer`.`user`  ( `mail`, `datatime`, `password`, `validation`, `session_id`  )VALUES ( '" . $tt->{'username'} . "', NOW(),  PASSWORD('" . $tt->{'password'} . "'), '0', '".$session_id."' );";
             $result = mysqli_query($con,$sql);
             $index = $con->insert_id;
             if (!$index) {
                 $out['status']="false";
             } else {
                 $out['status']="true";
-                $tomail = $tt->{'login'};
+                $tomail = $tt->{'username'};
                 $transport = Swift_SmtpTransport::newInstance('ssl://smtp.gmail.com', 465)
                     ->setUsername('freelance@kolesnikdenis.com')
                     ->setPassword('freelance321');
@@ -72,7 +72,7 @@ if ($tt->{'task'}) {
     }
     //валидация mail
     if ($tt->{'task'} == 'email_verification') {
-        $tomail = $tt->{'login'};
+        $tomail = $tt->{'username'};
         $session= $tt->{'session_id'};
         $sql = "SELECT * FROM `user` where  `user`.`mail` = '" . $tomail . "' and session_id = '" . $session . "' and validation = '0' ";
         $result = mysqli_query($con, $sql);
