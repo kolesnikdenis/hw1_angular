@@ -3,6 +3,34 @@ app.controller('MapController', ['$scope', function ($scope) {
     $scope.markert_work={ radius: 1, title: "1",desc: "blin",lat: 0, lng: 0,id:0 };
     $scope.select_marker="null select marker";
 
+    $scope.add_my_geo = function () {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(location) {
+                console.log(location.coords.latitude);
+                console.log(location.coords.longitude);
+                console.log(location.coords.accuracy);
+                places.push(
+                    {
+                        title : 'Are you here!',
+                        desc : 'measurement accuracy \ radius: '+location.coords.accuracy+"meters",
+                        lat : location.coords.latitude,
+                        lng : location.coords.longitude,
+                        radius:  (location.coords.accuracy/1000),
+                        color: '#70e470',
+                    }
+                );
+                createMarker(places[places.length-1],places.length-1);
+                createCircle(places[places.length-1]);
+                $scope.$apply();
+            },function (err) {
+                console.log("error geo:",err);
+                alert(err.message);
+            });
+        } else {
+            alert("geo недоступно...")
+        }
+
+    }
     $scope.My_slider = new Slider('#ex1');
     $scope.My_slider.on('change', function (sliderValue) {
         $scope.markert_work.radius = sliderValue.newValue;
@@ -96,7 +124,8 @@ app.controller('MapController', ['$scope', function ($scope) {
         $scope.markers[$scope.markert_work.id].title= $scope.markert_work.title;
     };
     var createCircle = function (info) {
-        var color="#FF0000";
+        var color="";
+        if ( info.color ) { color = info.color} else { color = "#FF0000";}
         if ( info.title.indexOf("Дом") >=0 ) { color = "#00FF00";}
         var cityCircle = new google.maps.Circle({
             strokeColor: color,
@@ -122,11 +151,24 @@ app.controller('MapController', ['$scope', function ($scope) {
     };
 
     var createMarker = function (info,index){
+        function pinSymbol(color) {
+            return {
+                path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+                fillColor: color,
+                fillOpacity: 1,
+                strokeColor: '#000',
+                strokeWeight: 2,
+                scale: 1,
+            };
+        }
+        var color="";
+        if ( info.color ) { color = info.color} else { color = "#FF0000";}
         var marker = new google.maps.Marker({
             map: $scope.map,
             position: new google.maps.LatLng(info.lat, info.lng),
             title: info.title,
             draggable: true,
+            icon: pinSymbol(color),
         });
         marker.content = '<div id="'+index+'" class="infoWindowContent">' + info.desc + '</div>';
         google.maps.event.addListener(marker, 'click', function(){
@@ -164,10 +206,6 @@ app.controller('MapController', ['$scope', function ($scope) {
             map: map
         });
     }
-
-
-
-
 
 }]);
 

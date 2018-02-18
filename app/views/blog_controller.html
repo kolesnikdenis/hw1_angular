@@ -1,0 +1,70 @@
+<style>
+    .Images_List {
+        border: 2px solid #8dbf41;
+    }
+    .wrapper {
+        display: inline-block;
+        position: relative;
+    }
+    .hover {
+        position: absolute;
+        border: 1px solid #31353d;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 188, 212, 0);
+        transition: background-color 0.5s;
+    }
+    .hover:hover {
+        background-color: rgba(0, 188, 212, 0.8);
+    }
+    img {
+        vertical-align: bottom;
+    }
+    ul.img {
+        margin: 0; /* Обнуляем значение отступов */
+        padding: 4px; /* Значение полей */
+    }
+    ul.img li {
+        display: inline; /* Отображать как строчный элемент */
+        margin-right: 5px; /* Отступ слева */
+    }
+</style>
+
+<div style=" flex-flow: row; justify-content: space-between; display: flex;">
+    <ul>
+        <li ng-repeat="item in bloglist" style="font:smaller">
+            <a  ng-href="javascript: return false;" ng-click="show(item.id)" > {{item.title}}</a>
+        </li>
+    </ul>
+    <div>
+        title: {{title}}</br>
+        date-time: {{datatime}}<br>
+        content: {{content}}<br>
+        content: {{content}}</br>
+        <!--photos: {{photos}}</br>-->
+        <!-- <button ngf-select="selectFiles($files)" multiple  accept="image/*">only select files</button> -->
+        <button ngf-select="uploadFiles($files)" multiple  accept="image/*">add img to post</button>
+        <br>
+        <!--<br>Files:
+        <ul>
+            <li ng-repeat="f in files" style="font:smaller">
+                {{f.name}}
+            </li>
+        </ul>-->
+        <span class="progress" ng-show="progress >= 0">
+        <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+    </span>
+        {{errorMsg}}
+        <ul class="img">
+            <li ng-repeat="f in photos" style="font:smaller">
+
+                <div class="wrapper">
+                    <div class="hover"><button type="button" ng-click="del_img(f.filename)" class="btn btn-danger btn-xs">X</button></div>
+                    <img src="http://freelance.kolesnikdenis.com/upload/{{f.filename}}" width=100 alt="{{f.alt}}"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

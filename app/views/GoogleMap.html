@@ -17,7 +17,6 @@
         #ex1Slider .slider-selection {
             background: #BABABA;
         }
-
         #map {
             height:420px;
             width:600px;
@@ -30,8 +29,9 @@
     </style>
 
     <div id="map"></div>
+    <button class="btn btn-primary" ng-click="add_my_geo()" > show my position</button>
     <div id="class" ng-repeat="(key, marker) in places " >
-        <a href="http://kolesnikdenis.com/a-level/test/index.html#/map#"ng-click="openInfoWindow($event, marker)">{{marker.title}} {{marker.lat}} {{marker.lng}}</a><button type="button" ng-click="del_dot(key)" class="btn btn-danger"><i class="fa fa-trash" ></i></button>
+        <a  ng-href="javascript: return false;" ng-click="openInfoWindow($event, marker)">{{marker.title}} {{marker.lat}} {{marker.lng}}</a><button type="button" ng-click="del_dot(key)" class="btn btn-danger"><i class="fa fa-trash" ></i></button>
     </div>
     <i class="fas fa-trash-alt"></i>
 

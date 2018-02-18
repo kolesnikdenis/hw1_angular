@@ -1,4 +1,4 @@
-app.controller('LoginController', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
+app.controller('LoginController', ['$scope', '$http', '$uibModal','localStorageService', function($scope, $http, $uibModal,localStorageService) {
 
     var Registration = {
         mail: '',
@@ -23,30 +23,24 @@ app.controller('LoginController', ['$scope', '$http', '$uibModal', function($sco
                 $scope.ok = function() {
                     if (!$scope.newUser.mail || $scope.newUser.password.length <=0 ) { alert("что-то Вы ввели не так .... ")}
                     else {
-                        console.log("reg:"+$scope.newUser);
+                        console.log("reg:",$scope.newUser);
                         $uibModalInstance.close($scope.newUser);
                     }
                 };
 
                 $uibModalInstance.result.then(function (selectedItem) {
                     console.log("reg user:",selectedItem);
-                    selectedItem['task'] = 'registration';
-                    selectedItem['login'] = selectedItem['mail'];
-                    console.log("send data:",selectedItem);
-                    var config = {headers : {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}}
-                    $http.post('//kolesnikdenis.com/a-level/test/api.php', "data=" + JSON.stringify(selectedItem), config).then(
+                    loginData={username: selectedItem.mail, password:selectedItem.password};
+                    $http.post('//freelance.kolesnikdenis.com/api/account', loginData).then(
                         function (response) {
-                            //var data = JSON.parse(response.data);
-                            if (response.data.status == "true" ) {
-                                if (response.data.msg) alert(response.data.msg);
+                            if (response.data.status == "ok" ) {
+                                console.log("login Ok:", response.data);
+                                localStorageService.set('token', response.data.user_profile.token);
+                                localStorageService.set('username', response.data.user_profile.mail);
+                                localStorageService.set('username_id', response.data.user_profile.id);
                             }else {
-                                if (response.data.msg) alert(response.data.msg);
-                                else {
-                                    alert("возникла ошибка...")
-                                }
+                                console.log("error:",response);
                             }
-                            console.log(response.data)
-
                         })
                     //modalInstance.close(console.log($scope.newUser));
                 }, function () {
